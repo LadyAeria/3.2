@@ -1,7 +1,7 @@
 # 3.2
+I plan to make an rpg-like game where you interact with characters with different stages/conditions/settings (based on the five stages of grief or focus on different disabilities)
 
 Week 1: Research games for inspiration for 3.0 project.
-        Plan to make an rpg-like game where you interact with characters with different stages/conditions/settings (based on the five stages of grief or focus on different disabilities)
 
 Week 2: Familiarize with some of the libraries in p5.js that I plan to use 
         Using clickable library for clickable character interactions
