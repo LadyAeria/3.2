@@ -3,7 +3,6 @@ let mode = "title";
 //font
 let mdr;
 
-let song;
 // characters/stages
 var denial;
 var anger;
@@ -21,13 +20,11 @@ function preload() {
   mask = loadImage("mask.png");
   deny = loadImage("denial.png");
   angry = loadImage("anger.png");
-  bargaining = loadImage("bargain.png");
+ gaining = loadImage("bargain.png");
   depress = loadImage("depression.png");
   accept = loadImage("acceptance.png");
   
   mdr = loadFont("MeteoraDemoRegular-nMEV.ttf");
-  
-  song = loadSound('Goodbye_My_Dear_by_Steffen_Daum_(getmp3.pro).mp3');
 }
 
 function setup() {
@@ -141,7 +138,6 @@ function draw() {
 //press to start and go to main screen
 function keyPressed() {
   if (key === "s" || key === "S") {
-    song.loop();
     mode = "main";
   }
 }
