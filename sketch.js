@@ -1,103 +1,126 @@
 let mode = "title";
+
+//font
 let mdr;
-var character1;
-var character2;
-var character3;
-var character4;
-var character5;
-var clickImg;
+
+let song;
+// characters/stages
+var denial;
+var anger;
+var bargain;
+var depression;
+var acceptance;
+
+var denialScreen = 0;
+var angerScreen = 0;
+var bargainScreen = 0;
+var depressionScreen = 0;
+var acceptanceScreen = 0;
 
 function preload() {
-  smile = loadImage("kindpng_5901054.png");
+  mask = loadImage("mask.png");
+  deny = loadImage("denial.png");
+  angry = loadImage("anger.png");
+  bargaining = loadImage("bargain.png");
+  depress = loadImage("depression.png");
+  accept = loadImage("acceptance.png");
+  
   mdr = loadFont("MeteoraDemoRegular-nMEV.ttf");
+  
+  song = loadSound('Goodbye_My_Dear_by_Steffen_Daum_(getmp3.pro).mp3');
 }
 
 function setup() {
   createCanvas(500, 500);
-
+  
   //Character One
-  character1 = new Clickable();
-  character1.image = smile;
-  character1.imageScale = 0.8;
-  character1.locate(90, 100);
-  character1.resize(100, 100);
-  character1.text = "";
-  character1.onHover = function () {
+  denial = new Clickable();
+  denial.locate(90, 100);
+  denial.resize(100, 100);
+  denial.text = "D e n i a l";
+  denial.onHover = function () {
     this.color = "#FFDE00";
     this.noTint = false;
     this.tint = "#FF0000";
   };
-  character1.onOutside = function () {
+  denial.onOutside = function () {
     this.color = "#FFFFFF";
     this.noTint = true;
   };
+  denial.onPress = function () {
+    closeStage();
+  };
 
   //Character Two
-  character2 = new Clickable();
-  character2.image = smile;
-  character2.imageScale = 0.8;
-  character2.locate(310, 100);
-  character2.resize(100, 100);
-  character2.text = "";
-  character2.onHover = function () {
+  anger = new Clickable();
+  anger.locate(310, 100);
+  anger.resize(100, 100);
+  anger.text = "A n g e r";
+  anger.onHover = function () {
     this.color = "#3EAEFF";
     this.noTint = false;
     this.tint = "#FF0000";
   };
-  character2.onOutside = function () {
+  anger.onOutside = function () {
     this.color = "#FFFFFF";
     this.noTint = true;
   };
+  anger.onPress = function () {
+    closeStage();
+  };
 
   //Character Three
-  character3 = new Clickable();
-  character3.image = smile;
-  character3.imageScale = 0.8;
-  character3.locate(30, 250);
-  character3.resize(100, 100);
-  character3.text = "";
-  character3.onHover = function () {
+  bargain = new Clickable();
+  bargain.locate(30, 250);
+  bargain.resize(100, 100);
+  bargain.text = "B a r g a i n";
+  bargain.onHover = function () {
     this.color = "#B566F1";
     this.noTint = false;
     this.tint = "#FF0000";
   };
-  character3.onOutside = function () {
+  bargain.onOutside = function () {
     this.color = "#FFFFFF";
     this.noTint = true;
   };
+  bargain.onPress = function () {
+    closeStage();
+  };
 
   //Character Four
-  character4 = new Clickable();
-  character4.image = smile;
-  character4.imageScale = 0.8;
-  character4.locate(370, 250);
-  character4.resize(100, 100);
-  character4.text = "";
-  character4.onHover = function () {
+  depression = new Clickable();
+  depression.locate(370, 250);
+  depression.resize(100, 100);
+  depression.text = "D e p r e s s i o n";
+  depression.onHover = function () {
     this.color = "#98FAB9";
     this.noTint = false;
     this.tint = "#FF0000";
   };
-  character4.onOutside = function () {
+  depression.onOutside = function () {
     this.color = "#FFFFFF";
     this.noTint = true;
   };
+  depression.onPress = function () {
+    closeStage();
+  };
 
   //Character Five
-  character5 = new Clickable();
-  character5.image = smile;
-  character5.imageScale = 0.8;
-  character5.locate(200, 370);
-  character5.resize(100, 100);
-  character5.text = "";
-  character5.onHover = function () {
+  acceptance = new Clickable();
+  acceptance.locate(200, 370);
+  acceptance.resize(100, 100);
+  acceptance.text = "A c c e p t a n c e";
+  acceptance.onHover = function () {
     this.color = "#FA6CC0";
     this.noTint = false;
     this.tint = "#FF0000";
   };
-  character5.onOutside = function () {
+  acceptance.onOutside = function () {
     this.color = "#FFFFFF";
     this.noTint = true;
+  };
+  acceptance.onPress = function () {
+    closeStage();
   };
 }
 
@@ -118,6 +141,7 @@ function draw() {
 //press to start and go to main screen
 function keyPressed() {
   if (key === "s" || key === "S") {
+    song.loop();
     mode = "main";
   }
 }
@@ -126,11 +150,18 @@ function keyPressed() {
 function keyPressed2() {
   if (key === "b" || key === "B") {
     mode = "main";
+    denialScreen = 0;
+    angerScreen = 0;
+    bargainScreen = 0;
+    depressionScreen = 0;
+    acceptanceScreen = 0;
   }
 }
 
 function titleScreen() {
   background(255, 229, 168);
+  image(mask, 0, 0);
+  mask.resize(500, 500);
   strokeWeight(5);
   stroke(255);
   fill(0);
@@ -147,6 +178,7 @@ function titleScreen() {
   text('Press "s" to begin', width * 0.5, height * 0.66);
 }
 
+//main game screen
 function mainStage() {
   background(255, 229, 168);
   strokeWeight(0);
@@ -155,31 +187,100 @@ function mainStage() {
   textSize(25);
   textAlign(CENTER);
   text("Click on any of the characters!", width * 0.5, height * 0.1);
-  character1.draw();
-  character2.draw();
-  character3.draw();
-  character4.draw();
-  character5.draw();
+  denial.draw();
+  anger.draw();
+  bargain.draw();
+  depression.draw();
+  acceptance.draw();
 }
 
 //close up interaction with selected character
 function closeStage() {
   background(255, 229, 168);
+  //Character 1 close up
+  if (denial.onPress) {
+    mode = "close";
+  }
+  denialScreen = 1;
+  if (denialScreen == 1) {
+    keyPressed2();
+    background(255, 229, 168);
+    image(deny, -50, 0);
+    deny.resize(600, 600);
+    textBox();
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text("word", 250, 400);
+  }
 
-  // if (character1.onPress) {
-  //   character1.hide();
-  //   character2.hide();
-  //   character3.hide();
-  //   character4.hide();
-  //   character5.hide();
-  // }
-  // fill(255, 0, 0, 127);
-  // rect(0, 50, 100, 20);
+  if (anger.onPress) {
+    mode = "close";
+  }
+  angerScreen = 1;
+  if (angerScreen == 1) {
+    keyPressed2();
+    background(255, 229, 168);
+    image(angry, -50, 0);
+    angry.resize(600, 600);
+    textBox();
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text("word", 250, 400);
+  }
+
+  if (bargain.onPress) {
+    mode = "close";
+  }
+  bargainScreen = 1;
+  if (bargainScreen == 1) {
+    keyPressed2();
+    background(255, 229, 168);
+    image(bargaining, -50, 0);
+    bargaining.resize(600, 600);
+    textBox();
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text("word", 250, 400);
+  }
+
+  if (depression.onPress) {
+    mode = "close";
+  }
+  depressionScreen = 1;
+  if (depressionScreen == 1) {
+    keyPressed2();
+    background(255, 229, 168);
+    image(depress, -50, 0);
+    depress.resize(600, 600);
+    textBox();
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text("word", 250, 400);
+  }
+
+  if (acceptance.onPress) {
+    mode = "close";
+  }
+  acceptanceScreen = 1;
+  if (acceptanceScreen == 1) {
+    keyPressed2();
+    text("Press 'b' to return", 100, 0);
+    background(255, 229, 168);
+    image(accept, -50, 0);
+    accept.resize(600, 600);
+    textBox();
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text("word", 250, 400);
+  }
 }
 
-// function textBox() {
-//   let c = color("FFFFFF");
-//   fill(c);
-//   noStroke();
-//   rect(100, 370, 300, 100, 20);
-// }
+function textBox() {
+  fill(255, 0, 0, 127);
+  rect(100, 370, 300, 100, 20);
+}
