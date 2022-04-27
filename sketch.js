@@ -20,31 +20,32 @@ function preload() {
   mask = loadImage("mask.png");
   deny = loadImage("denial.png");
   angry = loadImage("anger.png");
- gaining = loadImage("bargain.png");
+  bargaining = loadImage("bargain.png");
   depress = loadImage("depression.png");
   accept = loadImage("acceptance.png");
-  
+
   mdr = loadFont("MeteoraDemoRegular-nMEV.ttf");
 }
 
 function setup() {
   createCanvas(500, 500);
-  
+
   //Character One
   denial = new Clickable();
   denial.locate(90, 100);
   denial.resize(100, 100);
   denial.text = "D e n i a l";
   denial.onHover = function () {
-    this.color = "#FFDE00";
+    this.color = "#FFE475";
     this.noTint = false;
     this.tint = "#FF0000";
   };
   denial.onOutside = function () {
-    this.color = "#FFFFFF";
+    this.color = "#805EE4";
     this.noTint = true;
   };
   denial.onPress = function () {
+    denialScreen = 1;
     closeStage();
   };
 
@@ -54,15 +55,16 @@ function setup() {
   anger.resize(100, 100);
   anger.text = "A n g e r";
   anger.onHover = function () {
-    this.color = "#3EAEFF";
+    this.color = "#FFE475";
     this.noTint = false;
     this.tint = "#FF0000";
   };
   anger.onOutside = function () {
-    this.color = "#FFFFFF";
+    this.color = "#FF3434";
     this.noTint = true;
   };
   anger.onPress = function () {
+    angerScreen = 1;
     closeStage();
   };
 
@@ -72,15 +74,16 @@ function setup() {
   bargain.resize(100, 100);
   bargain.text = "B a r g a i n";
   bargain.onHover = function () {
-    this.color = "#B566F1";
+    this.color = "#FFE475";
     this.noTint = false;
     this.tint = "#FF0000";
   };
   bargain.onOutside = function () {
-    this.color = "#FFFFFF";
+    this.color = "#98FAB9";
     this.noTint = true;
   };
   bargain.onPress = function () {
+    bargainScreen = 1;
     closeStage();
   };
 
@@ -90,15 +93,16 @@ function setup() {
   depression.resize(100, 100);
   depression.text = "D e p r e s s i o n";
   depression.onHover = function () {
-    this.color = "#98FAB9";
+    this.color = "#FFE475";
     this.noTint = false;
     this.tint = "#FF0000";
   };
   depression.onOutside = function () {
-    this.color = "#FFFFFF";
+    this.color = "#005FFF";
     this.noTint = true;
   };
   depression.onPress = function () {
+    depressionScreen = 1;
     closeStage();
   };
 
@@ -108,15 +112,16 @@ function setup() {
   acceptance.resize(100, 100);
   acceptance.text = "A c c e p t a n c e";
   acceptance.onHover = function () {
-    this.color = "#FA6CC0";
+    this.color = "#FFE475";
     this.noTint = false;
     this.tint = "#FF0000";
   };
   acceptance.onOutside = function () {
-    this.color = "#FFFFFF";
+    this.color = "#FF97D5";
     this.noTint = true;
   };
   acceptance.onPress = function () {
+    acceptanceScreen = 1;
     closeStage();
   };
 }
@@ -138,13 +143,6 @@ function draw() {
 //press to start and go to main screen
 function keyPressed() {
   if (key === "s" || key === "S") {
-    mode = "main";
-  }
-}
-
-//press to go back to main screen in middle of character interaction
-function keyPressed2() {
-  if (key === "b" || key === "B") {
     mode = "main";
     denialScreen = 0;
     angerScreen = 0;
@@ -182,7 +180,7 @@ function mainStage() {
   fill(0);
   textSize(25);
   textAlign(CENTER);
-  text("Click on any of the characters!", width * 0.5, height * 0.1);
+  text("Click on any of the stages!", width * 0.5, height * 0.1);
   denial.draw();
   anger.draw();
   bargain.draw();
@@ -193,45 +191,52 @@ function mainStage() {
 //close up interaction with selected character
 function closeStage() {
   background(255, 229, 168);
-  //Character 1 close up
+
+  //character 1 close up
   if (denial.onPress) {
     mode = "close";
   }
-  denialScreen = 1;
   if (denialScreen == 1) {
-    keyPressed2();
     background(255, 229, 168);
-    image(deny, -50, 0);
-    deny.resize(600, 600);
+    image(deny, 10, 0);
+    deny.resize(500, 500);
     textBox();
-    textSize(30);
+    textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("word", 250, 400);
+    text("This is denial.", 250, 400);
+    textSize(15);
+    text("Press s to return", 250, 490);
+    textSize(20);
+    text("Denial", width * 0.22, height * 0.73);
   }
 
+  //character 2 interaction
   if (anger.onPress) {
     mode = "close";
   }
-  angerScreen = 1;
+  // angerScreen = 1;
   if (angerScreen == 1) {
-    keyPressed2();
     background(255, 229, 168);
-    image(angry, -50, 0);
+    image(angry, -60, -100);
     angry.resize(600, 600);
     textBox();
     textSize(30);
     fill(0);
     textAlign(CENTER);
-    text("word", 250, 400);
+    text("This is anger.", 250, 400);
+    textSize(15);
+    text("Press s to return", 250, 490);
+    textSize(20);
+    text("Anger", width * 0.22, height * 0.73);
   }
 
+  //character 3 interaction
   if (bargain.onPress) {
     mode = "close";
   }
-  bargainScreen = 1;
+  // bargainScreen = 1;
   if (bargainScreen == 1) {
-    keyPressed2();
     background(255, 229, 168);
     image(bargaining, -50, 0);
     bargaining.resize(600, 600);
@@ -239,15 +244,19 @@ function closeStage() {
     textSize(30);
     fill(0);
     textAlign(CENTER);
-    text("word", 250, 400);
+    text("This is bargaining.", 250, 400);
+    textSize(15);
+    text("Press s to return", 250, 490);
+    textSize(20);
+    text("Bargaining", width * 0.25, height * 0.73);
   }
 
+  //character 4 interaction
   if (depression.onPress) {
     mode = "close";
   }
-  depressionScreen = 1;
+  // depressionScreen = 1;
   if (depressionScreen == 1) {
-    keyPressed2();
     background(255, 229, 168);
     image(depress, -50, 0);
     depress.resize(600, 600);
@@ -255,28 +264,35 @@ function closeStage() {
     textSize(30);
     fill(0);
     textAlign(CENTER);
-    text("word", 250, 400);
+    text("This is depression.", 250, 400);
+    textSize(15);
+    text("Press s to return", 250, 490);
+    textSize(20);
+    text("Depression", width * 0.25, height * 0.73);
   }
 
+  //character 5 interaction
   if (acceptance.onPress) {
     mode = "close";
   }
-  acceptanceScreen = 1;
+  // acceptanceScreen = 1;
   if (acceptanceScreen == 1) {
-    keyPressed2();
-    text("Press 'b' to return", 100, 0);
     background(255, 229, 168);
     image(accept, -50, 0);
     accept.resize(600, 600);
     textBox();
-    textSize(30);
+    textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("word", 250, 400);
+    text("This is acceptance.", 250, 400);
+    textSize(15);
+    text("Press s to return", 250, 490);
+    textSize(20);
+    text("Acceptance", width * 0.25, height * 0.73);
   }
 }
 
 function textBox() {
-  fill(255, 0, 0, 127);
-  rect(100, 370, 300, 100, 20);
+  fill(255, 255, 255, 150);
+  rect(50, 370, 400, 100, 20);
 }
