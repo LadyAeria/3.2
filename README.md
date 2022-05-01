@@ -1,5 +1,5 @@
-# 3.2
-So far I have a title screen and main screen active and working for the game. The framework goes from the title screen first to the main screen after clicking a specific key. I am still trying to figure out how to get the clickaable buttons to disappear so I can have only one specific character appear for the close up interaction.
+# How are you Feeling?
+This short and simple rpg-like game is a user interaction with five characters depicting the stages of grief. We all go through these stages at some point of our life whether they're in the given order or at random stages. This was created to give people an understanding of how a person would be reacting or saying within a certain stage.
 
 I plan to make an rpg-like game where you interact with characters with different stages/conditions/settings (based on the five stages of grief or focus on different disabilities)
 
