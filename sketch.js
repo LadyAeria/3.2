@@ -197,14 +197,15 @@ function closeStage() {
     mode = "close";
   }
   if (denialScreen == 1) {
-    background(255, 229, 168);
+    background(170, 163, 199);
     image(deny, 10, 0);
     deny.resize(500, 500);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("This is denial.", 250, 400);
+    text("No...this isn't happening. They're", 250, 400);
+    text("not gone!", 250, 430);
     textSize(15);
     text("Press s to return", 250, 490);
     textSize(20);
@@ -217,14 +218,15 @@ function closeStage() {
   }
   // angerScreen = 1;
   if (angerScreen == 1) {
-    background(255, 229, 168);
+    background(181, 140, 118);
     image(angry, -60, -100);
     angry.resize(600, 600);
     textBox();
-    textSize(30);
+    textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("This is anger.", 250, 400);
+    text("Why did you leave me?!", 250, 400);
+    text("Why'd you leave me here to suffer alone?!", 250, 430);
     textSize(15);
     text("Press s to return", 250, 490);
     textSize(20);
@@ -237,14 +239,14 @@ function closeStage() {
   }
   // bargainScreen = 1;
   if (bargainScreen == 1) {
-    background(255, 229, 168);
+    background(158, 166, 146);
     image(bargaining, -50, 0);
     bargaining.resize(600, 600);
     textBox();
-    textSize(30);
+    textSize(15);
     fill(0);
     textAlign(CENTER);
-    text("This is bargaining.", 250, 400);
+    text("...I'll do this, but I'm not doing anything more.", 250, 400);
     textSize(15);
     text("Press s to return", 250, 490);
     textSize(20);
@@ -257,14 +259,14 @@ function closeStage() {
   }
   // depressionScreen = 1;
   if (depressionScreen == 1) {
-    background(255, 229, 168);
+    background(0, 0, 0);
     image(depress, -50, 0);
     depress.resize(600, 600);
     textBox();
     textSize(30);
-    fill(0);
+    fill(255);
     textAlign(CENTER);
-    text("This is depression.", 250, 400);
+    text("...", 250, 400);
     textSize(15);
     text("Press s to return", 250, 490);
     textSize(20);
@@ -277,14 +279,16 @@ function closeStage() {
   }
   // acceptanceScreen = 1;
   if (acceptanceScreen == 1) {
-    background(255, 229, 168);
+    background(255, 255, 255);
     image(accept, -50, 0);
     accept.resize(600, 600);
     textBox();
     textSize(20);
     fill(0);
     textAlign(CENTER);
-    text("This is acceptance.", 250, 400);
+    text("It's better to move on instead", 250, 400);
+    text("of staying in the past. It's what", 250, 425);
+    text("they would've wanted for me.", 250, 450);
     textSize(15);
     text("Press s to return", 250, 490);
     textSize(20);
