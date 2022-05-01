@@ -181,6 +181,9 @@ function mainStage() {
   textSize(25);
   textAlign(CENTER);
   text("Click on any of the stages!", width * 0.5, height * 0.1);
+  textSize(15);
+  text("But for those wondering the usual order:", width * 0.5, height * 0.135);
+  text("Denial -> Anger -> Bargain -> Depression -> Acceptance", width * 0.5, height * 0.17);
   denial.draw();
   anger.draw();
   bargain.draw();
